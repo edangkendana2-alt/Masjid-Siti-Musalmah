@@ -28,6 +28,7 @@
         }
     </script>
     <style>
+        html { scroll-behavior: smooth; }
         body { font-family: 'Poppins', sans-serif; }
         .glass-card {
             background: rgba(255, 255, 255, 0.9);
@@ -154,7 +155,7 @@
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4" id="daftar-pengurus">
                 <div class="bg-white p-4 rounded-xl shadow-sm border text-center space-y-2">
                     <div class="w-16 h-16 rounded-full bg-amber-100 text-amber-700 mx-auto flex items-center justify-center font-bold text-xl shadow-inner">
-                        ED
+                        EMK
                     </div>
                     <div>
                         <h4 class="font-bold text-sm text-slate-800">Edang M Kendana</h4>
@@ -165,7 +166,7 @@
         </section>
 
         <!-- Section 4: Asisten Ustaz AI Interaktif -->
-        <section id="ai-ustaz" class="bg-gradient-to-br from-emeraldCustom to-darkGreen rounded-2xl p-6 text-white shadow-xl space-y-4">
+        <section id="ai-ustaz" class="bg-gradient-to-br from-emeraldCustom to-darkGreen rounded-2xl p-6 text-white shadow-xl space-y-4 scroll-mt-20">
             <div class="flex items-center space-x-3">
                 <div class="w-12 h-12 bg-amber-400 text-darkGreen rounded-full flex items-center justify-center text-2xl font-bold shadow">
                     <i class="fa-solid fa-robot"></i>
@@ -178,14 +179,14 @@
             
             <!-- Box Percakapan AI -->
             <div class="bg-white/10 p-4 rounded-xl text-sm border border-white/20 space-y-3">
-                <div id="ai-chat-box" class="h-40 overflow-y-auto space-y-2 p-2 bg-slate-900/30 rounded-lg text-xs">
-                    <div class="bg-emerald-800/80 p-2.5 rounded-lg max-w-[85%]">
-                        <strong>Ustaz AI:</strong> Assalamu'alaikum Warahmatullahi Wabarakatuh. Ada yang bisa saya bantu seputar kegiatan masjid atau panduan ibadah?
+                <div id="ai-chat-box" class="h-48 overflow-y-auto space-y-2 p-3 bg-slate-900/40 rounded-lg text-xs leading-relaxed">
+                    <div class="bg-emerald-800/90 p-3 rounded-lg max-w-[85%] border border-emerald-600/30">
+                        <strong>Ustaz AI:</strong> Assalamu'alaikum Warahmatullahi Wabarakatuh. Ada yang bisa saya bantu seputar kegiatan masjid, jadwal ngaji, atau panduan ibadah?
                     </div>
                 </div>
                 <div class="flex gap-2">
-                    <input type="text" id="ai-input" placeholder="Tanyakan sesuatu (misal: jadwal ngaji, hukum niat)..." class="w-full px-3 py-2 rounded-lg text-slate-800 text-sm focus:outline-none focus:ring-2 focus:ring-amber-400">
-                    <button onclick="kirimPertanyaanAI()" class="bg-amber-500 hover:bg-amber-600 text-darkGreen font-bold px-4 py-2 rounded-lg text-sm transition flex items-center gap-1">
+                    <input type="text" id="ai-input" onkeypress="handleKeyPress(event)" placeholder="Ketik pertanyaan Anda di sini..." class="w-full px-3 py-2.5 rounded-lg text-slate-800 text-sm focus:outline-none focus:ring-2 focus:ring-amber-400">
+                    <button onclick="kirimPertanyaanAI()" class="bg-amber-500 hover:bg-amber-600 text-darkGreen font-bold px-5 py-2.5 rounded-lg text-sm transition flex items-center gap-2 shadow-md">
                         <i class="fa-solid fa-paper-plane"></i> Tanya
                     </button>
                 </div>
@@ -200,21 +201,25 @@
         <p class="mt-1 text-slate-400">Dikelola secara transparan dan amanah.</p>
     </footer>
 
-    <!-- Script Logika Jam, Sholat & Ustaz AI -->
+    <!-- Script Logika Jam & Ustaz AI -->
     <script>
         function initApp() {
             updateJam();
             setInterval(updateJam, 1000);
         }
 
-        // 1. Jam Digital Realtime
         function updateJam() {
             const now = new Date();
             const jamStr = now.toLocaleTimeString('id-ID', { hour12: false }) + ' WIB';
             document.getElementById('jam-realtime').innerText = jamStr;
         }
 
-        // 2. Interaksi Ustaz AI
+        function handleKeyPress(e) {
+            if (e.key === 'Enter') {
+                kirimPertanyaanAI();
+            }
+        }
+
         function kirimPertanyaanAI() {
             const inputEl = document.getElementById('ai-input');
             const chatBox = document.getElementById('ai-chat-box');
@@ -224,33 +229,36 @@
 
             // Tampilkan Pesan User
             const userBubble = document.createElement('div');
-            userBubble.className = 'bg-amber-500/90 text-darkGreen p-2.5 rounded-lg max-w-[85%] ml-auto font-medium';
+            userBubble.className = 'bg-amber-500 text-darkGreen p-3 rounded-lg max-w-[85%] ml-auto font-medium shadow';
             userBubble.innerHTML = `<strong>Anda:</strong> ${pesan}`;
             chatBox.appendChild(userBubble);
 
             inputEl.value = '';
+            chatBox.scrollTop = chatBox.scrollHeight;
 
-            // Jawaban Otomatis AI
+            // Logika Jawaban Pintar Ustaz AI
             setTimeout(() => {
-                let balasan = "Masya Allah, pertanyaan yang bagus. Untuk detail kegiatan masjid dan fiqih praktis, mari kita makmurkan majelis ilmu di Masjid Siti Musalmah.";
+                let balasan = "Masya Allah, pertanyaan yang sangat baik. Mari kita jadikan masjid ini sarana memakmurkan ilmu dan silaturahmi.";
                 const pLower = pesan.toLowerCase();
 
-                if (pLower.includes("jadwal") || pLower.includes("ngasuh") || pLower.includes("kegiatan")) {
-                    balasan = "Jadwal kegiatan rutin kita adalah <strong>NGASUH (Ngaji Subuh)</strong> dilaksanakan setiap Ba'da Subuh di Ruang Utama Masjid Siti Musalmah.";
-                } else if (pLower.includes("pengurus") || pLower.includes("dkm")) {
-                    balasan = "DKM Masjid Siti Musalmah dipimpin dan dikelola oleh para pengurus amanah Pasir Mulya, termasuk Bpk. Edang M Kendana.";
-                } else if (pLower.includes("kas") || pLower.includes("keuangan") || pLower.includes("donasi")) {
-                    balasan = "Laporan keuangan kas DKM dan KISWA dicatat secara transparan dan terintegrasi real-time melalui sistem digital masjid.";
-                } else if (pLower.includes("assalamu") || pLower.includes("halo") || pLower.includes("salam")) {
-                    balasan = "Wa'alaikumussalam Warahmatullahi Wabarakatuh! Semoga berkah selalu melimpahi Anda dan keluarga.";
+                if (pLower.includes("jadwal") || pLower.includes("ngasuh") || pLower.includes("kegiatan") || pLower.includes("acara")) {
+                    balasan = "Program rutin kita adalah <strong>NGASUH (Ngaji Subuh)</strong> yang dilaksanakan setiap Ba'da Subuh di Ruang Utama Masjid Siti Musalmah.";
+                } else if (pLower.includes("pengurus") || pLower.includes("dkm") || pLower.includes("edang")) {
+                    balasan = "DKM Masjid Siti Musalmah dikelola oleh pengurus amanah Pasir Mulya, termasuk Bpk. Edang M Kendana dan jajaran DKM.";
+                } else if (pLower.includes("kas") || pLower.includes("keuangan") || pLower.includes("donasi") || pLower.includes("uang")) {
+                    balasan = "Laporan keuangan kas DKM dan KISWA dicatat secara transparan dan real-time melalui sistem digital yang terintegrasi.";
+                } else if (pLower.includes("assalamu") || pLower.includes("halo") || pLower.includes("salam") || pLower.includes("hi")) {
+                    balasan = "Wa'alaikumussalam Warahmatullahi Wabarakatuh! Semoga kesehatan dan keberkahan senantiasa menyertai Anda dan keluarga.";
+                } else if (pLower.includes("tajwid") || pLower.includes("ngaji") || pLower.includes("baca")) {
+                    balasan = "Untuk memperdalam bacaan Tajwid & Al-Qur'an, silakan ikuti majelis taklim dan kegiatan Ngaji Subuh rutin di masjid kita.";
                 }
 
                 const aiBubble = document.createElement('div');
-                aiBubble.className = 'bg-emerald-800/80 p-2.5 rounded-lg max-w-[85%]';
+                aiBubble.className = 'bg-emerald-800/90 p-3 rounded-lg max-w-[85%] border border-emerald-600/30';
                 aiBubble.innerHTML = `<strong>Ustaz AI:</strong> ${balasan}`;
                 chatBox.appendChild(aiBubble);
                 chatBox.scrollTop = chatBox.scrollHeight;
-            }, 600);
+            }, 500);
         }
     </script>
 </body>
