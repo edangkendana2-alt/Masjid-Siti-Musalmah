@@ -10,6 +10,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- PapaParse untuk membaca data CSV Google Sheets -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
     
     <script>
         tailwind.config = {
@@ -68,7 +70,7 @@
             <!-- Widget Jam Digital & Sholat -->
             <div class="inline-flex flex-col sm:flex-row items-center gap-3 bg-white/10 backdrop-blur-md px-4 py-2 rounded-2xl border border-white/20 shadow-md">
                 <div class="text-amber-300 font-bold text-base flex items-center gap-2">
-                    <i class="fa-regular fa-clock"></i> <span id="jam-realtime">Loading...</span>
+                    <i class="fa-regular fa-clock"></i> <span id="jam-realtime">00:00:00 WIB</span>
                 </div>
                 <span class="hidden sm:inline text-white/40">|</span>
                 <div class="text-xs text-emerald-100">
@@ -96,7 +98,7 @@
         <section id="keuangan" class="space-y-4">
             <div class="border-l-4 border-amber-500 pl-3">
                 <h3 class="text-xl font-bold text-darkGreen">Transparansi Keuangan Kas</h3>
-                <p class="text-xs text-slate-500">Laporan real-time kas DKM & KISWA (Terintegrasi AppSheet)</p>
+                <p class="text-xs text-slate-500">Laporan real-time kas DKM & KISWA</p>
             </div>
             
             <div class="grid md:grid-cols-2 gap-6">
@@ -109,8 +111,8 @@
                         <span class="text-xs font-semibold bg-emerald-100 text-emerald-800 px-2.5 py-1 rounded-full">Terverifikasi</span>
                     </div>
                     <div class="space-y-2">
-                        <p class="text-xs text-slate-500">Total Saldo Kas DKM Update:</p>
-                        <p class="text-3xl font-extrabold text-emerald-700" id="saldo-dkm">Rp 12.500.000</p>
+                        <p class="text-xs text-slate-500">Total Saldo Kas DKM:</p>
+                        <p class="text-3xl font-extrabold text-emerald-700" id="saldo-dkm">Memuat Data...</p>
                     </div>
                 </div>
 
@@ -123,8 +125,8 @@
                         <span class="text-xs font-semibold bg-amber-100 text-amber-800 px-2.5 py-1 rounded-full">Sosial & Yatim</span>
                     </div>
                     <div class="space-y-2">
-                        <p class="text-xs text-slate-500">Total Saldo Kas KISWA Update:</p>
-                        <p class="text-3xl font-extrabold text-amber-700" id="saldo-kiswa">Rp 5.750.000</p>
+                        <p class="text-xs text-slate-500">Total Saldo Kas KISWA:</p>
+                        <p class="text-3xl font-extrabold text-amber-700" id="saldo-kiswa">Memuat Data...</p>
                     </div>
                 </div>
             </div>
@@ -132,4 +134,167 @@
 
         <!-- Section 2: Jadwal Kegiatan -->
         <section id="kegiatan" class="space-y-4">
-            <div class="border-l-4 border-emerald-600 pl-
+            <div class="border-l-4 border-emerald-600 pl-3">
+                <h3 class="text-xl font-bold text-darkGreen">Jadwal & Program Kegiatan</h3>
+                <p class="text-xs text-slate-500">Mari ramaikan majelis ilmu dan kegiatan masjid</p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-4" id="daftar-kegiatan">
+                <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200">
+                    <div class="text-xs text-emerald-600 font-bold mb-1">Mendatang</div>
+                    <h4 class="font-bold text-slate-800">NGASUH (Ngaji Subuh)</h4>
+                    <p class="text-xs text-slate-500 mt-1"><i class="fa-regular fa-clock mr-1"></i> Ba'da Subuh</p>
+                    <p class="text-xs text-slate-500"><i class="fa-solid fa-location-dot mr-1"></i> Ruang Utama Masjid</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Profil Pengurus DKM -->
+        <section id="pengurus" class="space-y-4">
+            <div class="border-l-4 border-amber-500 pl-3">
+                <h3 class="text-xl font-bold text-darkGreen">Profil Pengurus DKM</h3>
+                <p class="text-xs text-slate-500">Amanah pelayanan jamaah Masjid Siti Musalmah Pasir Mulya</p>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4" id="daftar-pengurus">
+                <div class="bg-white p-4 rounded-xl shadow-sm border text-center space-y-2">
+                    <div class="w-16 h-16 rounded-full bg-amber-100 text-amber-700 mx-auto flex items-center justify-center font-bold text-xl shadow-inner">
+                        EMK
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-sm text-slate-800">Edang M Kendana</h4>
+                        <p class="text-xs text-emerald-600 font-medium">Pengurus DKM</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Asisten Ustaz AI Interaktif -->
+        <section id="ai-ustaz" class="bg-gradient-to-br from-emeraldCustom to-darkGreen rounded-2xl p-6 text-white shadow-xl space-y-4 scroll-mt-20">
+            <div class="flex items-center space-x-3">
+                <div class="w-12 h-12 bg-amber-400 text-darkGreen rounded-full flex items-center justify-center text-2xl font-bold shadow">
+                    <i class="fa-solid fa-robot"></i>
+                </div>
+                <div>
+                    <h3 class="font-bold text-lg">Ustaz AI Siti Musalmah</h3>
+                    <p class="text-xs text-amber-200">Asisten Interaktif Pertanyaan Agama, Kegiatan & Tajwid</p>
+                </div>
+            </div>
+            
+            <!-- Box Percakapan AI -->
+            <div class="bg-white/10 p-4 rounded-xl text-sm border border-white/20 space-y-3">
+                <div id="ai-chat-box" class="h-52 overflow-y-auto space-y-3 p-3 bg-slate-900/40 rounded-lg text-xs leading-relaxed">
+                    <div class="bg-emerald-800/90 p-3 rounded-lg max-w-[85%] border border-emerald-600/30">
+                        <strong>Ustaz AI:</strong> Assalamu'alaikum Warahmatullahi Wabarakatuh. Saya Ustaz AI Masjid Siti Musalmah. Silakan tanyakan seputar jadwal kegiatan masjid, pengurus, laporan kas, atau panduan ibadah & tajwid!
+                    </div>
+                </div>
+                <div class="flex gap-2">
+                    <input type="text" id="ai-input" placeholder="Ketik pertanyaan Anda di sini..." class="w-full px-3 py-2.5 rounded-lg text-slate-800 text-sm focus:outline-none focus:ring-2 focus:ring-amber-400">
+                    <button type="button" id="btn-tanya" class="bg-amber-500 hover:bg-amber-600 text-darkGreen font-bold px-5 py-2.5 rounded-lg text-sm transition flex items-center gap-2 shadow-md">
+                        <i class="fa-solid fa-paper-plane"></i> Tanya
+                    </button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-darkGreen text-white text-center py-6 text-xs text-slate-300 border-t border-emerald-800">
+        <p>&copy; 2026 DKM Masjid Siti Musalmah, Pasir Mulya, Bogor Barat.</p>
+        <p class="mt-1 text-slate-400">Dikelola secara transparan dan amanah.</p>
+    </footer>
+
+    <!-- Script Utama (Pasti Jalan) -->
+    <script>
+        const CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSGNkvm6s5B-QGQ5lC_q4S2IkSB-yxEy-7EsW6Qpd7UvDfdNMtSJlwZnyst6a2RN0Pe3MZqAka_z3Az/pub?output=csv";
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // 1. Jam Realtime
+            function updateJam() {
+                const now = new Date();
+                const jamStr = now.toLocaleTimeString('id-ID', { hour12: false }) + ' WIB';
+                document.getElementById('jam-realtime').innerText = jamStr;
+            }
+            updateJam();
+            setInterval(updateJam, 1000);
+
+            // 2. Tarik Data Real-time dari CSV Google Sheets
+            if (typeof Papa !== 'undefined') {
+                Papa.parse(CSV_URL, {
+                    download: true,
+                    header: true,
+                    complete: function(results) {
+                        let totalDKM = 0;
+                        let totalKISWA = 0;
+                        results.data.forEach(row => {
+                            let keys = Object.keys(row);
+                            keys.forEach(k => {
+                                let valStr = row[k];
+                                if (valStr && typeof valStr === 'string') {
+                                    let num = parseFloat(valStr.replace(/[^0-9.-]+/g,""));
+                                    if (!isNaN(num) && num > 1000) {
+                                        if (k.toUpperCase().includes("KISWA") || valStr.toUpperCase().includes("KISWA")) {
+                                            totalKISWA += num;
+                                        } else {
+                                            totalDKM += num;
+                                        }
+                                    }
+                                }
+                            });
+                        });
+                        document.getElementById('saldo-dkm').innerText = "Rp " + (totalDKM > 0 ? totalDKM.toLocaleString('id-ID') : "0");
+                        document.getElementById('saldo-kiswa').innerText = "Rp " + (totalKISWA > 0 ? totalKISWA.toLocaleString('id-ID') : "0");
+                    },
+                    error: function() {
+                        document.getElementById('saldo-dkm').innerText = "Rp 0";
+                        document.getElementById('saldo-kiswa').innerText = "Rp 0";
+                    }
+                });
+            }
+
+            // 3. Pasang Listener Ustaz AI
+            const inputEl = document.getElementById('ai-input');
+            const btnTanya = document.getElementById('btn-tanya');
+
+            function kirimPertanyaanAI() {
+                const chatBox = document.getElementById('ai-chat-box');
+                const pesan = inputEl.value.trim();
+                if (!pesan) return;
+
+                const userBubble = document.createElement('div');
+                userBubble.className = 'bg-amber-500 text-darkGreen p-3 rounded-lg max-w-[85%] ml-auto font-medium shadow';
+                userBubble.innerHTML = `<strong>Anda:</strong> ${pesan}`;
+                chatBox.appendChild(userBubble);
+
+                inputEl.value = '';
+                chatBox.scrollTop = chatBox.scrollHeight;
+
+                setTimeout(() => {
+                    let balasan = "Masya Allah, terima kasih atas pertanyaannya. Mari bersama-sama kita meramaikan Masjid Siti Musalmah Pasir Mulya.";
+                    const pLower = pesan.toLowerCase();
+
+                    if (pLower.includes("jadwal") || pLower.includes("ngasuh") || pLower.includes("kegiatan") || pLower.includes("ngaji")) {
+                        balasan = "Kegiatan rutin utama kita adalah <strong>NGASUH (Ngaji Subuh)</strong> setiap Ba'da Subuh di Ruang Utama Masjid Siti Musalmah.";
+                    } else if (pLower.includes("pengurus") || pLower.includes("dkm") || pLower.includes("edang") || pLower.includes("nana")) {
+                        balasan = "DKM Masjid Siti Musalmah dikelola oleh pengurus amanah Pasir Mulya, antara lain Bpk. Edang M Kendana, Bpk. Nana Suherna, Bpk. Nana Suhana, Sdr. Regi, dan segenap pengurus DKM.";
+                    } else if (pLower.includes("kas") || pLower.includes("keuangan") || pLower.includes("donasi") || pLower.includes("laporan")) {
+                        balasan = "Laporan Keuangan Kas DKM dan KISWA dicatat secara transparan via AppSheet dan terhubung langsung di website ini.";
+                    } else if (pLower.includes("assalamu") || pLower.includes("salam") || pLower.includes("halo") || pLower.includes("pagi")) {
+                        balasan = "Wa'alaikumussalam Warahmatullahi Wabarakatuh! Semoga kesehatan dan keberkahan senantiasa mengiringi Anda.";
+                    }
+
+                    const aiBubble = document.createElement('div');
+                    aiBubble.className = 'bg-emerald-800/90 p-3 rounded-lg max-w-[85%] border border-emerald-600/30';
+                    aiBubble.innerHTML = `<strong>Ustaz AI:</strong> ${balasan}`;
+                    chatBox.appendChild(aiBubble);
+                    chatBox.scrollTop = chatBox.scrollHeight;
+                }, 300);
+            }
+
+            btnTanya.addEventListener('click', kirimPertanyaanAI);
+            inputEl.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter') kirimPertanyaanAI();
+            });
+        });
+    </script>
+</body>
+</html>
