@@ -10,8 +10,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- PapaParse untuk Baca CSV Google Sheets -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
     
     <script>
         tailwind.config = {
@@ -39,7 +37,7 @@
         }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800 flex flex-col min-h-screen" onload="initApp()">
+<body class="bg-slate-50 text-slate-800 flex flex-col min-h-screen">
 
     <!-- Header / Navbar -->
     <header class="bg-gradient-to-r from-darkGreen via-emeraldCustom to-darkGreen text-white shadow-lg sticky top-0 z-50">
@@ -70,7 +68,7 @@
             <!-- Jam Digital Realtime & Waktu Sholat Widget -->
             <div class="inline-flex flex-col sm:flex-row items-center gap-3 bg-white/10 backdrop-blur-md px-4 py-2 rounded-2xl border border-white/20 shadow-md">
                 <div class="text-amber-300 font-bold text-base flex items-center gap-2">
-                    <i class="fa-regular fa-clock"></i> <span id="jam-realtime">00:00:00 WIB</span>
+                    <i class="fa-regular fa-clock"></i> <span id="jam-realtime">--:--:-- WIB</span>
                 </div>
                 <span class="hidden sm:inline text-white/40">|</span>
                 <div class="text-xs text-emerald-100">
@@ -94,11 +92,11 @@
     <!-- Main Content Container -->
     <main class="container mx-auto px-4 py-8 space-y-12 flex-grow">
 
-        <!-- Section 1: Transparansi Keuangan Dual-Ledger -->
+        <!-- Section 1: Transparansi Keuangan -->
         <section id="keuangan" class="space-y-4">
             <div class="border-l-4 border-amber-500 pl-3">
                 <h3 class="text-xl font-bold text-darkGreen">Transparansi Keuangan Kas</h3>
-                <p class="text-xs text-slate-500">Laporan real-time kas DKM & KISWA terintegrasi</p>
+                <p class="text-xs text-slate-500">Laporan real-time kas DKM & KISWA</p>
             </div>
             
             <div class="grid md:grid-cols-2 gap-6">
@@ -112,7 +110,7 @@
                     </div>
                     <div class="space-y-2">
                         <p class="text-xs text-slate-500">Total Saldo Kas DKM:</p>
-                        <p class="text-3xl font-extrabold text-emerald-700" id="saldo-dkm">Terhubung Live</p>
+                        <p class="text-3xl font-extrabold text-emerald-700" id="saldo-dkm">Rp 0</p>
                     </div>
                 </div>
 
@@ -122,4 +120,20 @@
                         <h4 class="font-bold text-lg text-amber-800 flex items-center gap-2">
                             <i class="fa-solid fa-hand-holding-heart text-amber-600"></i> Kas Santunan KISWA
                         </h4>
-                        <span class="text-xs font-semibold bg-amber-100 text-amber-80
+                        <span class="text-xs font-semibold bg-amber-100 text-amber-800 px-2.5 py-1 rounded-full">Sosial & Yatim</span>
+                    </div>
+                    <div class="space-y-2">
+                        <p class="text-xs text-slate-500">Total Saldo Kas KISWA:</p>
+                        <p class="text-3xl font-extrabold text-amber-700" id="saldo-kiswa">Rp 0</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Jadwal Kegiatan -->
+        <section id="kegiatan" class="space-y-4">
+            <div class="border-l-4 border-emerald-600 pl-3">
+                <h3 class="text-xl font-bold text-darkGreen">Jadwal & Program Kegiatan</h3>
+                <p class="text-xs text-slate-500">Mari ramaikan majelis ilmu dan kegiatan masjid</p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-4" id="daftar
