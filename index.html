@@ -30,20 +30,20 @@
     <style>
         body { font-family: 'Poppins', sans-serif; }
         .glass-card {
-            background: rgba(255, 255, 255, 0.85);
+            background: rgba(255, 255, 255, 0.9);
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.2);
         }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800 flex flex-col min-h-screen">
+<body class="bg-slate-50 text-slate-800 flex flex-col min-h-screen" onload="initApp()">
 
     <!-- Header / Navbar -->
     <header class="bg-gradient-to-r from-darkGreen via-emeraldCustom to-darkGreen text-white shadow-lg sticky top-0 z-50">
         <div class="container mx-auto px-4 py-3 flex justify-between items-center">
             <div class="flex items-center space-x-3">
                 <div class="w-10 h-10 rounded-full bg-amber-400 text-darkGreen flex items-center justify-center font-bold text-xl shadow-md">
-                    <i class="fa-solid font-bold fa-mosque"></i>
+                    <i class="fa-solid fa-mosque"></i>
                 </div>
                 <div>
                     <h1 class="text-lg md:text-xl font-bold leading-tight">MASJID SITI MUSALMAH</h1>
@@ -55,23 +55,34 @@
                 <a href="#keuangan" class="hover:text-amber-300 transition">Keuangan</a>
                 <a href="#kegiatan" class="hover:text-amber-300 transition">Kegiatan</a>
                 <a href="#pengurus" class="hover:text-amber-300 transition">Pengurus</a>
-                <a href="#galeri" class="hover:text-amber-300 transition">Galeri</a>
+                <a href="#ai-ustaz" class="hover:text-amber-300 transition">Ustaz AI</a>
             </nav>
         </div>
     </header>
 
     <!-- Hero Section -->
-    <section id="beranda" class="relative bg-gradient-to-b from-darkGreen to-emeraldCustom text-white py-16 px-4 text-center">
+    <section id="beranda" class="relative bg-gradient-to-b from-darkGreen to-emeraldCustom text-white py-12 px-4 text-center">
         <div class="max-w-3xl mx-auto space-y-4">
-            <span class="inline-block bg-amber-500 text-darkGreen font-semibold text-xs px-3 py-1 rounded-full uppercase tracking-wider shadow">Portal Informasi & Transparansi</span>
+            
+            <!-- Jam Digital Realtime & Waktu Sholat Widget -->
+            <div class="inline-flex flex-col sm:flex-row items-center gap-3 bg-white/10 backdrop-blur-md px-4 py-2 rounded-2xl border border-white/20 shadow-md">
+                <div class="text-amber-300 font-bold text-base flex items-center gap-2">
+                    <i class="fa-regular fa-clock"></i> <span id="jam-realtime">00:00:00 WIB</span>
+                </div>
+                <span class="hidden sm:inline text-white/40">|</span>
+                <div class="text-xs text-emerald-100">
+                    Waktu Sholat Bogor Barat: <span id="jadwal-sholat-next" class="font-bold text-white">Subuh 04:28</span>
+                </div>
+            </div>
+
             <h2 class="text-3xl md:text-5xl font-extrabold tracking-tight">Selamat Datang di Masjid Siti Musalmah</h2>
             <p class="text-sm md:text-base text-emerald-100 leading-relaxed">
                 Jl. Ace Sukarna V, RT 01/RW 03, Kel. Pasir Mulya, Kec. Bogor Barat, Kota Bogor
             </p>
-            <div class="pt-4 flex justify-center gap-3">
+            <div class="pt-2 flex justify-center gap-3">
                 <a href="#keuangan" class="bg-amber-500 hover:bg-amber-600 text-darkGreen font-bold px-5 py-2.5 rounded-lg shadow-md transition text-sm">Lihat Laporan Kas</a>
                 <a href="#ai-ustaz" class="bg-white/10 hover:bg-white/20 border border-white/30 text-white font-medium px-5 py-2.5 rounded-lg transition text-sm flex items-center gap-2">
-                    <i class="fa-solid fa-robot text-amber-300"></i> Ustaz AI
+                    <i class="fa-solid fa-robot text-amber-300"></i> Tanya Ustaz AI
                 </a>
             </div>
         </div>
@@ -98,7 +109,7 @@
                     </div>
                     <div class="space-y-2">
                         <p class="text-xs text-slate-500">Total Saldo Kas DKM:</p>
-                        <p class="text-2xl font-extrabold text-emerald-700" id="saldo-dkm">Rp 0</p>
+                        <p class="text-3xl font-extrabold text-emerald-700" id="saldo-dkm">Rp 0</p>
                     </div>
                 </div>
 
@@ -112,7 +123,7 @@
                     </div>
                     <div class="space-y-2">
                         <p class="text-xs text-slate-500">Total Saldo Kas KISWA:</p>
-                        <p class="text-2xl font-extrabold text-amber-700" id="saldo-kiswa">Rp 0</p>
+                        <p class="text-3xl font-extrabold text-amber-700" id="saldo-kiswa">Rp 0</p>
                     </div>
                 </div>
             </div>
@@ -142,18 +153,18 @@
             </div>
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4" id="daftar-pengurus">
                 <div class="bg-white p-4 rounded-xl shadow-sm border text-center space-y-2">
-                    <div class="w-16 h-16 rounded-full bg-slate-200 mx-auto flex items-center justify-center text-slate-400 text-2xl">
-                        <i class="fa-solid fa-user"></i>
+                    <div class="w-16 h-16 rounded-full bg-amber-100 text-amber-700 mx-auto flex items-center justify-center font-bold text-xl shadow-inner">
+                        ED
                     </div>
                     <div>
-                        <h4 class="font-bold text-sm text-slate-800">Ketua DKM</h4>
-                        <p class="text-xs text-emerald-600">Pengurus Masjid</p>
+                        <h4 class="font-bold text-sm text-slate-800">Edang M Kendana</h4>
+                        <p class="text-xs text-emerald-600 font-medium">Pengurus DKM</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Section 4: Asisten Ustaz AI -->
+        <!-- Section 4: Asisten Ustaz AI Interaktif -->
         <section id="ai-ustaz" class="bg-gradient-to-br from-emeraldCustom to-darkGreen rounded-2xl p-6 text-white shadow-xl space-y-4">
             <div class="flex items-center space-x-3">
                 <div class="w-12 h-12 bg-amber-400 text-darkGreen rounded-full flex items-center justify-center text-2xl font-bold shadow">
@@ -161,14 +172,22 @@
                 </div>
                 <div>
                     <h3 class="font-bold text-lg">Ustaz AI Siti Musalmah</h3>
-                    <p class="text-xs text-amber-200">Asisten Interaktif Pertanyaan Agama & Tajwid</p>
+                    <p class="text-xs text-amber-200">Asisten Interaktif Pertanyaan Agama, Kegiatan & Tajwid</p>
                 </div>
             </div>
-            <div class="bg-white/10 p-4 rounded-xl text-sm border border-white/20">
-                <p class="text-xs text-emerald-100 mb-2">Tanyakan seputar hukum ibadah, kegiatan masjid, atau panduan bacaan Tajwid:</p>
+            
+            <!-- Box Percakapan AI -->
+            <div class="bg-white/10 p-4 rounded-xl text-sm border border-white/20 space-y-3">
+                <div id="ai-chat-box" class="h-40 overflow-y-auto space-y-2 p-2 bg-slate-900/30 rounded-lg text-xs">
+                    <div class="bg-emerald-800/80 p-2.5 rounded-lg max-w-[85%]">
+                        <strong>Ustaz AI:</strong> Assalamu'alaikum Warahmatullahi Wabarakatuh. Ada yang bisa saya bantu seputar kegiatan masjid atau panduan ibadah?
+                    </div>
+                </div>
                 <div class="flex gap-2">
-                    <input type="text" placeholder="Ketik pertanyaan Anda di sini..." class="w-full px-3 py-2 rounded-lg text-slate-800 text-sm focus:outline-none focus:ring-2 focus:ring-amber-400">
-                    <button class="bg-amber-500 hover:bg-amber-600 text-darkGreen font-bold px-4 py-2 rounded-lg text-sm transition">Tanya</button>
+                    <input type="text" id="ai-input" placeholder="Tanyakan sesuatu (misal: jadwal ngaji, hukum niat)..." class="w-full px-3 py-2 rounded-lg text-slate-800 text-sm focus:outline-none focus:ring-2 focus:ring-amber-400">
+                    <button onclick="kirimPertanyaanAI()" class="bg-amber-500 hover:bg-amber-600 text-darkGreen font-bold px-4 py-2 rounded-lg text-sm transition flex items-center gap-1">
+                        <i class="fa-solid fa-paper-plane"></i> Tanya
+                    </button>
                 </div>
             </div>
         </section>
@@ -181,5 +200,58 @@
         <p class="mt-1 text-slate-400">Dikelola secara transparan dan amanah.</p>
     </footer>
 
+    <!-- Script Logika Jam, Sholat & Ustaz AI -->
+    <script>
+        function initApp() {
+            updateJam();
+            setInterval(updateJam, 1000);
+        }
+
+        // 1. Jam Digital Realtime
+        function updateJam() {
+            const now = new Date();
+            const jamStr = now.toLocaleTimeString('id-ID', { hour12: false }) + ' WIB';
+            document.getElementById('jam-realtime').innerText = jamStr;
+        }
+
+        // 2. Interaksi Ustaz AI
+        function kirimPertanyaanAI() {
+            const inputEl = document.getElementById('ai-input');
+            const chatBox = document.getElementById('ai-chat-box');
+            const pesan = inputEl.value.trim();
+
+            if (!pesan) return;
+
+            // Tampilkan Pesan User
+            const userBubble = document.createElement('div');
+            userBubble.className = 'bg-amber-500/90 text-darkGreen p-2.5 rounded-lg max-w-[85%] ml-auto font-medium';
+            userBubble.innerHTML = `<strong>Anda:</strong> ${pesan}`;
+            chatBox.appendChild(userBubble);
+
+            inputEl.value = '';
+
+            // Jawaban Otomatis AI
+            setTimeout(() => {
+                let balasan = "Masya Allah, pertanyaan yang bagus. Untuk detail kegiatan masjid dan fiqih praktis, mari kita makmurkan majelis ilmu di Masjid Siti Musalmah.";
+                const pLower = pesan.toLowerCase();
+
+                if (pLower.includes("jadwal") || pLower.includes("ngasuh") || pLower.includes("kegiatan")) {
+                    balasan = "Jadwal kegiatan rutin kita adalah <strong>NGASUH (Ngaji Subuh)</strong> dilaksanakan setiap Ba'da Subuh di Ruang Utama Masjid Siti Musalmah.";
+                } else if (pLower.includes("pengurus") || pLower.includes("dkm")) {
+                    balasan = "DKM Masjid Siti Musalmah dipimpin dan dikelola oleh para pengurus amanah Pasir Mulya, termasuk Bpk. Edang M Kendana.";
+                } else if (pLower.includes("kas") || pLower.includes("keuangan") || pLower.includes("donasi")) {
+                    balasan = "Laporan keuangan kas DKM dan KISWA dicatat secara transparan dan terintegrasi real-time melalui sistem digital masjid.";
+                } else if (pLower.includes("assalamu") || pLower.includes("halo") || pLower.includes("salam")) {
+                    balasan = "Wa'alaikumussalam Warahmatullahi Wabarakatuh! Semoga berkah selalu melimpahi Anda dan keluarga.";
+                }
+
+                const aiBubble = document.createElement('div');
+                aiBubble.className = 'bg-emerald-800/80 p-2.5 rounded-lg max-w-[85%]';
+                aiBubble.innerHTML = `<strong>Ustaz AI:</strong> ${balasan}`;
+                chatBox.appendChild(aiBubble);
+                chatBox.scrollTop = chatBox.scrollHeight;
+            }, 600);
+        }
+    </script>
 </body>
 </html>
