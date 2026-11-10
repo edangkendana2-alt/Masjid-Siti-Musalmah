@@ -31,7 +31,7 @@
         html { scroll-behavior: smooth; }
         body { font-family: 'Poppins', sans-serif; }
         .glass-card {
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.2);
         }
@@ -65,14 +65,14 @@
     <section id="beranda" class="relative bg-gradient-to-b from-darkGreen to-emeraldCustom text-white py-12 px-4 text-center">
         <div class="max-w-3xl mx-auto space-y-4">
             
-            <!-- Jam Digital Realtime & Waktu Sholat Widget -->
+            <!-- Widget Jam Digital & Sholat -->
             <div class="inline-flex flex-col sm:flex-row items-center gap-3 bg-white/10 backdrop-blur-md px-4 py-2 rounded-2xl border border-white/20 shadow-md">
                 <div class="text-amber-300 font-bold text-base flex items-center gap-2">
-                    <i class="fa-regular fa-clock"></i> <span id="jam-realtime">--:--:-- WIB</span>
+                    <i class="fa-regular fa-clock"></i> <span id="jam-realtime">Loading...</span>
                 </div>
                 <span class="hidden sm:inline text-white/40">|</span>
                 <div class="text-xs text-emerald-100">
-                    Waktu Sholat Bogor Barat: <span id="jadwal-sholat-next" class="font-bold text-white">Subuh 04:28</span>
+                    Waktu Sholat Bogor Barat: <span class="font-bold text-white">Subuh 04:28 | Dzuhur 11:45</span>
                 </div>
             </div>
 
@@ -96,7 +96,7 @@
         <section id="keuangan" class="space-y-4">
             <div class="border-l-4 border-amber-500 pl-3">
                 <h3 class="text-xl font-bold text-darkGreen">Transparansi Keuangan Kas</h3>
-                <p class="text-xs text-slate-500">Laporan real-time kas DKM & KISWA</p>
+                <p class="text-xs text-slate-500">Laporan real-time kas DKM & KISWA (Terintegrasi AppSheet)</p>
             </div>
             
             <div class="grid md:grid-cols-2 gap-6">
@@ -109,8 +109,8 @@
                         <span class="text-xs font-semibold bg-emerald-100 text-emerald-800 px-2.5 py-1 rounded-full">Terverifikasi</span>
                     </div>
                     <div class="space-y-2">
-                        <p class="text-xs text-slate-500">Total Saldo Kas DKM:</p>
-                        <p class="text-3xl font-extrabold text-emerald-700" id="saldo-dkm">Rp 0</p>
+                        <p class="text-xs text-slate-500">Total Saldo Kas DKM Update:</p>
+                        <p class="text-3xl font-extrabold text-emerald-700" id="saldo-dkm">Rp 12.500.000</p>
                     </div>
                 </div>
 
@@ -123,8 +123,8 @@
                         <span class="text-xs font-semibold bg-amber-100 text-amber-800 px-2.5 py-1 rounded-full">Sosial & Yatim</span>
                     </div>
                     <div class="space-y-2">
-                        <p class="text-xs text-slate-500">Total Saldo Kas KISWA:</p>
-                        <p class="text-3xl font-extrabold text-amber-700" id="saldo-kiswa">Rp 0</p>
+                        <p class="text-xs text-slate-500">Total Saldo Kas KISWA Update:</p>
+                        <p class="text-3xl font-extrabold text-amber-700" id="saldo-kiswa">Rp 5.750.000</p>
                     </div>
                 </div>
             </div>
@@ -132,8 +132,4 @@
 
         <!-- Section 2: Jadwal Kegiatan -->
         <section id="kegiatan" class="space-y-4">
-            <div class="border-l-4 border-emerald-600 pl-3">
-                <h3 class="text-xl font-bold text-darkGreen">Jadwal & Program Kegiatan</h3>
-                <p class="text-xs text-slate-500">Mari ramaikan majelis ilmu dan kegiatan masjid</p>
-            </div>
-            <div class="grid md:grid-cols-3 gap-4" id="daftar
+            <div class="border-l-4 border-emerald-600 pl-
