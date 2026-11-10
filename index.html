@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masjid Siti Musalmah - Pasir Mulya, Bogor</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        emeraldCustom: '#047857',
+                        goldCustom: '#D97706',
+                        darkGreen: '#064e3b',
+                    },
+                    fontFamily: {
+                        poppins: ['Poppins', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Poppins', sans-serif; }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 flex flex-col min-h-screen">
+
+    <!-- Header / Navbar -->
+    <header class="bg-gradient-to-r from-darkGreen via-emeraldCustom to-darkGreen text-white shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-full bg-amber-400 text-darkGreen flex items-center justify-center font-bold text-xl shadow-md">
+                    <i class="fa-solid font-bold fa-mosque"></i>
+                </div>
+                <div>
+                    <h1 class="text-lg md:text-xl font-bold leading-tight">MASJID SITI MUSALMAH</h1>
+                    <p class="text-xs text-amber-200">Mewujudkan tata kelola masjid yang amanah</p>
+                </div>
+            </div>
+            <nav class="hidden md:flex space-x-6 font-medium text-sm">
+                <a href="#beranda" class="hover:text-amber-300 transition">Beranda</a>
+                <a href="#keuangan" class="hover:text-amber-300 transition">Keuangan</a>
+                <a href="#kegiatan" class="hover:text-amber-300 transition">Kegiatan</a>
+                <a href="#pengurus" class="hover:text-amber-300 transition">Pengurus</a>
+                <a href="#galeri" class="hover:text-amber-300 transition">Galeri</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="beranda" class="relative bg-gradient-to-b from-darkGreen to-emeraldCustom text-white py-16 px-4 text-center">
+        <div class="max-w-3xl mx-auto space-y-4">
+            <span class="inline-block bg-amber-500 text-darkGreen font-semibold text-xs px-3 py-1 rounded-full uppercase tracking-wider shadow">Portal Informasi & Transparansi</span>
+            <h2 class="text-3xl md:text-5xl font-extrabold tracking-tight">Selamat Datang di Masjid Siti Musalmah</h2>
+            <p class="text-sm md:text-base text-emerald-100 leading-relaxed">
+                Jl. Ace Sukarna V, RT 01/RW 03, Kel. Pasir Mulya, Kec. Bogor Barat, Kota Bogor
+            </p>
+            <div class="pt-4 flex justify-center gap-3">
+                <a href="#keuangan" class="bg-amber-500 hover:bg-amber-600 text-darkGreen font-bold px-5 py-2.5 rounded-lg shadow-md transition text-sm">Lihat Laporan Kas</a>
+                <a href="#ai-ustaz" class="bg-white/10 hover:bg-white/20 border border-white/30 text-white font-medium px-5 py-2.5 rounded-lg transition text-sm flex items-center gap-2">
+                    <i class="fa-solid fa-robot text-amber-300"></i> Ustaz AI
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content Container -->
+    <main class="container mx-auto px-4 py-8 space-y-12 flex-grow">
+
+        <!-- Section 1: Transparansi Keuangan Dual-Ledger -->
+        <section id="keuangan" class="space-y-4">
+            <div class="border-l-4 border-amber-500 pl-3">
+                <h3 class="text-xl font-bold text-darkGreen">Transparansi Keuangan Kas</h3>
+                <p class="text-xs text-slate-500">Laporan real-time kas DKM & KISWA</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-6">
+                <!-- Kas DKM Card -->
+                <div class="glass-card rounded-2xl p-6 shadow-md border-t-4 border-emerald-600">
+                    <div class="flex justify-between items-center mb-4">
+                        <h4 class="font-bold text-lg text-emerald-800 flex items-center gap-2">
+                            <i class="fa-solid fa-wallet text-emerald-600"></i> Kas Operasional DKM
+                        </h4>
+                        <span class="text-xs font-semibold bg-emerald-100 text-emerald-800 px-2.5 py-1 rounded-full">Terverifikasi</span>
+                    </div>
+                    <div class="space-y-2">
+                        <p class="text-xs text-slate-500">Total Saldo Kas DKM:</p>
+                        <p class="text-2xl font-extrabold text-emerald-700" id="saldo-dkm">Rp 0</p>
+                    </div>
+                </div>
+
+                <!-- Kas KISWA Card -->
+                <div class="glass-card rounded-2xl p-6 shadow-md border-t-4 border-amber-500">
+                    <div class="flex justify-between items-center mb-4">
+                        <h4 class="font-bold text-lg text-amber-800 flex items-center gap-2">
+                            <i class="fa-solid fa-hand-holding-heart text-amber-600"></i> Kas Santunan KISWA
+                        </h4>
+                        <span class="text-xs font-semibold bg-amber-100 text-amber-800 px-2.5 py-1 rounded-full">Sosial & Yatim</span>
+                    </div>
+                    <div class="space-y-2">
+                        <p class="text-xs text-slate-500">Total Saldo Kas KISWA:</p>
+                        <p class="text-2xl font-extrabold text-amber-700" id="saldo-kiswa">Rp 0</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Jadwal Kegiatan -->
+        <section id="kegiatan" class="space-y-4">
+            <div class="border-l-4 border-emerald-600 pl-3">
+                <h3 class="text-xl font-bold text-darkGreen">Jadwal & Program Kegiatan</h3>
+                <p class="text-xs text-slate-500">Mari ramaikan majelis ilmu dan kegiatan masjid</p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-4" id="daftar-kegiatan">
+                <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200">
+                    <div class="text-xs text-emerald-600 font-bold mb-1">Mendatang</div>
+                    <h4 class="font-bold text-slate-800">NGASUH (Ngaji Subuh)</h4>
+                    <p class="text-xs text-slate-500 mt-1"><i class="fa-regular fa-clock mr-1"></i> Ba'da Subuh</p>
+                    <p class="text-xs text-slate-500"><i class="fa-solid fa-location-dot mr-1"></i> Ruang Utama Masjid</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Profil Pengurus DKM -->
+        <section id="pengurus" class="space-y-4">
+            <div class="border-l-4 border-amber-500 pl-3">
+                <h3 class="text-xl font-bold text-darkGreen">Profil Pengurus DKM</h3>
+                <p class="text-xs text-slate-500">Amanah pelayanan jamaah Masjid Siti Musalmah</p>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4" id="daftar-pengurus">
+                <div class="bg-white p-4 rounded-xl shadow-sm border text-center space-y-2">
+                    <div class="w-16 h-16 rounded-full bg-slate-200 mx-auto flex items-center justify-center text-slate-400 text-2xl">
+                        <i class="fa-solid fa-user"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-sm text-slate-800">Ketua DKM</h4>
+                        <p class="text-xs text-emerald-600">Pengurus Masjid</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Asisten Ustaz AI -->
+        <section id="ai-ustaz" class="bg-gradient-to-br from-emeraldCustom to-darkGreen rounded-2xl p-6 text-white shadow-xl space-y-4">
+            <div class="flex items-center space-x-3">
+                <div class="w-12 h-12 bg-amber-400 text-darkGreen rounded-full flex items-center justify-center text-2xl font-bold shadow">
+                    <i class="fa-solid fa-robot"></i>
+                </div>
+                <div>
+                    <h3 class="font-bold text-lg">Ustaz AI Siti Musalmah</h3>
+                    <p class="text-xs text-amber-200">Asisten Interaktif Pertanyaan Agama & Tajwid</p>
+                </div>
+            </div>
+            <div class="bg-white/10 p-4 rounded-xl text-sm border border-white/20">
+                <p class="text-xs text-emerald-100 mb-2">Tanyakan seputar hukum ibadah, kegiatan masjid, atau panduan bacaan Tajwid:</p>
+                <div class="flex gap-2">
+                    <input type="text" placeholder="Ketik pertanyaan Anda di sini..." class="w-full px-3 py-2 rounded-lg text-slate-800 text-sm focus:outline-none focus:ring-2 focus:ring-amber-400">
+                    <button class="bg-amber-500 hover:bg-amber-600 text-darkGreen font-bold px-4 py-2 rounded-lg text-sm transition">Tanya</button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-darkGreen text-white text-center py-6 text-xs text-slate-300 border-t border-emerald-800">
+        <p>&copy; 2026 DKM Masjid Siti Musalmah, Pasir Mulya, Bogor Barat.</p>
+        <p class="mt-1 text-slate-400">Dikelola secara transparan dan amanah.</p>
+    </footer>
+
+</body>
+</html>
